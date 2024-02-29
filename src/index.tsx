@@ -12,6 +12,7 @@ import ProductListPage from './pages/ProductListPage';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 import ProductListQueryDemo from './pages/ProductListQueryDemo';
+import CartSummary from './pages/CartSummary';
 
 const root = ReactDOM.createRoot(
 	document.getElementById('root') as HTMLElement
@@ -42,6 +43,7 @@ root.render(
 								path="/ProductsQuery"
 								Component={ProductListQueryDemo}
 							></Route>
+							<Route path="/CartSummary" Component={CartSummary}></Route>
 						</Route>
 					</Routes>
 				</BrowserRouter>

@@ -2,6 +2,9 @@ import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import { RefetchOptions, useQuery } from '@tanstack/react-query';
 import { Product } from '../store/features/ProductSlice';
+import { useDispatch } from 'react-redux';
+import { AppDispatch } from '../store/store';
+import { CartItem, addToCart } from '../store/features/CartSlice';
 
 function ProductListQueryDemo() {
 	// veri çekme işlemlerini useQuery üstleniyor
@@ -13,6 +16,8 @@ function ProductListQueryDemo() {
 	const [products, setProducts] = useState<Product[]>([]);
 	const [depId, setDepId] = useState<number>(0); // depId değişirse veri tekrardan yüklenir.
 	// 'FetchProducts', depId queryKey dinamik değere göre değişim yapar ve aynı verinin güncellenmesi gerektini anladığı için tekrar verinin çekilmesini fetch edilmesini otomatik olarak tetikler.
+
+	const dispatch = useDispatch<AppDispatch>();
 
 	useEffect(() => {
 		console.log('depId değişti');
@@ -65,8 +70,21 @@ function ProductListQueryDemo() {
 				{products.map((item: Product) => {
 					return (
 						<div key={item.ProductID}>
-							{item.ProductName}
-							<button>Sepete Ekle</button>
+							{item.ProductName} {item.UnitPrice}
+							<button
+								onClick={() => {
+									dispatch(
+										addToCart({
+											id: item.ProductID,
+											name: item.ProductName,
+											quantity: 1,
+											price: parseFloat((item.UnitPrice * 1.1).toFixed(2)),
+										} as CartItem)
+									);
+								}}
+							>
+								Sepete Ekle
+							</button>
 							<button
 								onClick={() => {
 									const filteredData = products.filter(
