@@ -9,6 +9,7 @@ function App() {
 		<div className="App">
 			<Link to="/CounterSummary">Counter Summary</Link>
 			<Link to="/CounterOperation">Counter Operation</Link>
+			<Link to="/Products">Ürünler</Link>
 			{/* <CounterOperationPage /> */}
 			<Outlet />
 		</div>

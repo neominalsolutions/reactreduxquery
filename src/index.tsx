@@ -8,9 +8,10 @@ import { store } from './store/store';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import CounterSummaryPage from './pages/CounterSummaryPage';
 import CounterOperationPage from './pages/CounterOperationPage';
+import ProductListPage from './pages/ProductListPage';
 
 const root = ReactDOM.createRoot(
-  document.getElementById('root') as HTMLElement
+	document.getElementById('root') as HTMLElement
 );
 root.render(
 	<React.StrictMode>
@@ -19,9 +20,16 @@ root.render(
 		<Provider store={store}>
 			<BrowserRouter>
 				<Routes>
-					<Route path='/' Component={App}>
-						<Route path='/CounterSummary' Component={CounterSummaryPage}></Route>
-						<Route path='/CounterOperation' Component={CounterOperationPage}></Route>
+					<Route path="/" Component={App}>
+						<Route
+							path="/CounterSummary"
+							Component={CounterSummaryPage}
+						></Route>
+						<Route
+							path="/CounterOperation"
+							Component={CounterOperationPage}
+						></Route>
+						<Route path="/Products" Component={ProductListPage}></Route>
 					</Route>
 				</Routes>
 			</BrowserRouter>

@@ -1,12 +1,18 @@
 import { configureStore } from '@reduxjs/toolkit';
 import CounterReducer from './features/CounterSlice';
+import { ProductRecuder } from './features/ProductSlice';
 
 // reducer kısmına geliştiriğimiz sliceları tanımlayacağız
 // uygulamada tek store birden fazla slice tanımı olabilir
 export const store = configureStore({
 	reducer: {
 		counterState: CounterReducer,
+		productState: ProductRecuder,
 	},
+	middleware: (getDefaultMiddleware) =>
+		getDefaultMiddleware({
+			serializableCheck: false,
+		}),
 });
 // ne kadar reducer varsa , ile ayrılarak
 // storedan counterState çağıracağımız zaman counterState olarak çağırıyoruz.
