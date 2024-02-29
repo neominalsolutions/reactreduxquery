@@ -9,31 +9,44 @@ import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import CounterSummaryPage from './pages/CounterSummaryPage';
 import CounterOperationPage from './pages/CounterOperationPage';
 import ProductListPage from './pages/ProductListPage';
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
+import ProductListQueryDemo from './pages/ProductListQueryDemo';
 
 const root = ReactDOM.createRoot(
 	document.getElementById('root') as HTMLElement
 );
+
+const client = new QueryClient();
+
 root.render(
 	<React.StrictMode>
 		{/* Context API deki gibi bütün uygulamayı provider componenti ile sarmalladık. */}
 
-		<Provider store={store}>
-			<BrowserRouter>
-				<Routes>
-					<Route path="/" Component={App}>
-						<Route
-							path="/CounterSummary"
-							Component={CounterSummaryPage}
-						></Route>
-						<Route
-							path="/CounterOperation"
-							Component={CounterOperationPage}
-						></Route>
-						<Route path="/Products" Component={ProductListPage}></Route>
-					</Route>
-				</Routes>
-			</BrowserRouter>
-		</Provider>
+		<QueryClientProvider client={client}>
+			{/* <ReactQueryDevtools initialIsOpen={false} /> */}
+			<Provider store={store}>
+				<BrowserRouter>
+					<Routes>
+						<Route path="/" Component={App}>
+							<Route
+								path="/CounterSummary"
+								Component={CounterSummaryPage}
+							></Route>
+							<Route
+								path="/CounterOperation"
+								Component={CounterOperationPage}
+							></Route>
+							<Route path="/Products" Component={ProductListPage}></Route>
+							<Route
+								path="/ProductsQuery"
+								Component={ProductListQueryDemo}
+							></Route>
+						</Route>
+					</Routes>
+				</BrowserRouter>
+			</Provider>
+		</QueryClientProvider>
 	</React.StrictMode>
 );
 
